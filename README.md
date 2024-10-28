@@ -1,6 +1,6 @@
 # Desafio Kafka e Spark: Simulação de Vendas E-commerce
 
-Este projeto tem como objetivo simular um sistema de vendas em um e-commerce, onde utilizamos o Apache Kafka para enviar e consumir dados em tempo real e o PySpark para processar essas mensagens. 
+Este projeto tem como objetivo simular um sistema de vendas em um e-commerce, onde utilizei o Apache Kafka para enviar e consumir dados em tempo real e o PySpark para processar essas mensagens. 
 
 ## Descrição do Desafio
 
@@ -14,7 +14,7 @@ Este projeto tem como objetivo simular um sistema de vendas em um e-commerce, on
    - **Produtos comprados**: Lista de produtos com nome e quantidade.
    - **Quantidade de cada produto**: Quantidade individual de cada item comprado.
    - **Valor total da venda**: Total em reais da compra.
-   - **Data e hora da venda**: Data e hora da venda em formato brasileiro `DD/MM/YYYY HH:MM:SS`.
+   - **Data e hora da venda**: Data e hora da venda no formato `DD/MM/YYYY HH:MM:SS`.<br/>
 
    > **OBS**: Para a geração dos dados, foi utilizada a biblioteca `Faker`.
 
