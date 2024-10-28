@@ -48,3 +48,7 @@ Este projeto tem como objetivo simular um sistema de vendas em um e-commerce, on
    ```bash
    python3.10 -m venv venv
    source venv/bin/activate
+
+3. Instale as bibliotecas necessárias com:
+   ```bash
+   pip install -r requirements.txt
