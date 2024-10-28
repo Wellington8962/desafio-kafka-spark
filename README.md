@@ -52,3 +52,32 @@ Este projeto tem como objetivo simular um sistema de vendas em um e-commerce, on
 3. Instale as bibliotecas necessárias com:
    ```bash
    pip install -r requirements.txt
+
+### 2. Iniciar o Apache Kafka
+
+1. Inicie o Zookeeper:
+   ```bash
+   $KAFKA_HOME/bin/zookeeper-server-start.sh $KAFKA_HOME/config/zookeeper.properties
+
+2. Em outro terminal, inicie o servidor Kafka:
+   ```bash
+   $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties
+
+3. Crie o tópico `vendas_ecommerce`:
+   ```bash
+   $KAFKA_HOME/bin/kafka-topics.sh --create --topic vendas_ecommerce --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+### 3. Executar o Produtor de Mensagens e o Consumidor PySpark
+
+1. Execute o script `vendas_ecommerce.py` para gerar e enviar as mensagens de vendas simuladas ao Kafka:
+   ```bash
+   python3 vendas_ecommerce.py
+   
+2. Execute o consumidor em PySpark para processar as mensagens:
+   ```bash
+   spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 pyspark_consumer_vendas.py
+
+## Conclusão
+
+Este projeto demonstrou a integração do Apache Kafka e PySpark para processar dados de vendas em tempo real. Essa estrutura é útil para simular cenários de e-commerce e pode ser expandida para outras aplicações de monitoramento e análise em tempo real.
+
