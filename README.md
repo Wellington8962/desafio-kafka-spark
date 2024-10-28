@@ -14,8 +14,8 @@ Este projeto tem como objetivo simular um sistema de vendas em um e-commerce, on
    - **Produtos comprados**: Lista de produtos com nome e quantidade.
    - **Quantidade de cada produto**: Quantidade individual de cada item comprado.
    - **Valor total da venda**: Total em reais da compra.
-   - **Data e hora da venda**: Data e hora da venda no formato `DD/MM/YYYY HH:MM:SS`.<br/>
-
+   - **Data e hora da venda**: Data e hora da venda no formato `DD/MM/YYYY HH:MM:SS`.
+   <br/>
    > **OBS**: Para a geração dos dados, foi utilizada a biblioteca `Faker`.
 
 3. **Criar um Receptor de Mensagens em PySpark**: Desenvolver um consumidor em PySpark que lê as mensagens do Kafka, processa os dados e exibe o valor total das vendas agrupado por produto.
