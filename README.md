@@ -20,14 +20,14 @@ Este projeto tem como objetivo simular um sistema de vendas em um e-commerce, on
 
 3. **Criar um Receptor de Mensagens em PySpark**: Desenvolver um consumidor em PySpark que lê as mensagens do Kafka, processa os dados e exibe o valor total das vendas agrupado por produto.
 
-   - **Transformação**: A transformação aplicada foi o agrupamento das vendas por produto, somando o valor total vendido para cada item.
+   - **Transformação**: A transformação aplicada foi o agrupamento das vendas por produto. O cálculo do valor total de vendas para cada produto é feito multiplicando a quantidade pelo preço unitário e, em seguida, somando os valores para cada item vendido.
 
 ---
 
 ## Estrutura do Projeto
 
-- `vendas_ecommerce.py`: Script Python que atua como produtor de mensagens, enviando dados de vendas simulados ao tópico Kafka.
-- `pyspark_consumer_vendas.py`: Script PySpark que atua como consumidor, lê os dados de vendas do Kafka, aplica a transformação e exibe os resultados no console.
+- `producer_vendas_ecommerce.py`: Script Python que atua como produtor de mensagens, enviando dados de vendas simulados ao tópico Kafka.
+- `consumer_pyspark_ecommerce.py`: Script PySpark que atua como consumidor, lê os dados de vendas do Kafka, aplica a transformação e exibe os resultados no console.
 - `requirements.txt`: Arquivo com as dependências do projeto para fácil replicação do ambiente.
 - `README.md`: Instruções e detalhes do projeto.
 
@@ -55,6 +55,8 @@ Este projeto tem como objetivo simular um sistema de vendas em um e-commerce, on
 
 ### 2. Iniciar o Apache Kafka
 
+ > **OBS**:Certifique-se de que o Apache Kafka está instalado em sua máquina.
+
 1. Inicie o Zookeeper:
    ```bash
    $KAFKA_HOME/bin/zookeeper-server-start.sh $KAFKA_HOME/config/zookeeper.properties
@@ -69,13 +71,16 @@ Este projeto tem como objetivo simular um sistema de vendas em um e-commerce, on
 
 ### 3. Executar o Produtor de Mensagens e o Consumidor PySpark
 
-1. Execute o script `vendas_ecommerce.py` para gerar e enviar as mensagens de vendas simuladas ao Kafka:
+1. Execute o script `producer_vendas_ecommerce.py` para gerar e enviar as mensagens de vendas simuladas ao Kafka:
    ```bash
-   python3 vendas_ecommerce.py
+   python3 producer_vendas_ecommerce.py
    
 2. Execute o consumidor em PySpark para processar as mensagens:
    ```bash
-   spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 pyspark_consumer_vendas.py
+   spark-submit consumer_pyspark_ecommerce.py
+
+> **Nota:Para interromper o processo de qualquer serviço do Kafka, como Zookeeper, Producer ou Consumer, pressione `Ctrl + C` no terminal. Isso encerra o serviço de forma segura caso seja necessário parar devido a um erro ou por qualquer outro motivo.**
+
 
 ## Conclusão
 
