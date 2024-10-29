@@ -55,7 +55,7 @@ Este projeto tem como objetivo simular um sistema de vendas em um e-commerce, on
 
 ### 2. Iniciar o Apache Kafka
 
- > **OBS**:Certifique-se de que o Apache Kafka está instalado em sua máquina.
+ > **OBS**: Certifique-se de que o Apache Kafka está instalado em sua máquina.
 
 1. Inicie o Zookeeper:
    ```bash
@@ -79,7 +79,7 @@ Este projeto tem como objetivo simular um sistema de vendas em um e-commerce, on
    ```bash
    spark-submit consumer_pyspark_ecommerce.py
 
-> **Nota:Para interromper o processo de qualquer serviço do Kafka, como Zookeeper, Producer ou Consumer, pressione `Ctrl + C` no terminal. Isso encerra o serviço de forma segura caso seja necessário parar devido a um erro ou por qualquer outro motivo.**
+> **Nota: Para interromper o processo de qualquer serviço do Kafka, como Zookeeper, Producer ou Consumer, pressione `Ctrl + C` no terminal. Isso encerra o serviço de forma segura caso seja necessário parar devido a um erro ou por qualquer outro motivo.**
 
 
 ## Conclusão
