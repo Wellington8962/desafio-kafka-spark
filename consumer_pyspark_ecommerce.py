@@ -5,7 +5,6 @@ from pyspark.sql.types import StructType, StructField, StringType, ArrayType, In
 # Inicializando a SparkSession com suporte ao Kafka
 spark = SparkSession.builder \
     .appName("Kafka_Ecommerce_Consumer") \
-    .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0") \
     .getOrCreate()
 
 # Configurações do Kafka

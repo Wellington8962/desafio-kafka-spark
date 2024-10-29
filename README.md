@@ -75,9 +75,9 @@ Este projeto tem como objetivo simular um sistema de vendas em um e-commerce, on
    ```bash
    python3 producer_vendas_ecommerce.py
    
-2. Execute o consumidor em PySpark para processar as mensagens:
+2. Execute o consumidor em PySpark com o conector Kafka para processar as mensagens:
    ```bash
-   spark-submit consumer_pyspark_ecommerce.py
+   spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 consumer_pyspark_ecommerce.py
 
 > **Nota: Para interromper o processo de qualquer serviço do Kafka, como Zookeeper, Producer ou Consumer, pressione `Ctrl + C` no terminal. Isso encerra o serviço de forma segura caso seja necessário parar devido a um erro ou por qualquer outro motivo.**
 
