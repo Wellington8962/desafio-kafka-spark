@@ -54,10 +54,19 @@ df_resultado = df_exploded.groupBy("produto") \
         spark_round(spark_sum("valor_venda"), 2).alias("valor_total_vendas")
     )
 
-# Exibindo o resultado no console
-query = df_resultado.writeStream \
-    .outputMode("complete") \
-    .format("console") \
-    .start()
-
-query.awaitTermination()
+try:
+    print("\033[92m" + "\n-----------------  INICIANDO CONSUMIDOR -----------------\n" + "\033[0m")
+    
+    query = df_resultado.writeStream \
+        .outputMode("complete") \
+        .format("console") \
+        .start()
+    
+    query.awaitTermination()
+except KeyboardInterrupt:
+    print("\033[93m" + "\n-----------------  FINALIZANDO CONSUMIDOR -----------------\n" + "\033[0m")
+except Exception as error:
+    print("\033[91m" + f"\n----------------- ERRO -----------------\n{error}\n" + "\033[0m")
+finally:
+    print("\033[92m" + "\n----------------- CONSUMIDOR FINALIZADO COM SUCESSO -----------------\n" + "\033[0m")
+    spark.stop()

@@ -2,6 +2,7 @@ from faker import Faker
 from kafka import KafkaProducer
 import json
 import random
+import time
 from datetime import datetime
 
 # Inicializando o Faker e o Kafka Producer
@@ -59,11 +60,23 @@ def gerar_mensagem_venda():
         "data_hora_venda": data_venda.strftime("%d/%m/%Y %H:%M:%S")
     }
 
-# Enviando mensagens para o tópico do Kafka
-for _ in range(10):  
-    mensagem = gerar_mensagem_venda()
-    producer.send('vendas_ecommerce', value=mensagem)
-    print(f"Mensagem enviada: {mensagem}")
+# Bloco principal com tratamento de interrupções e erros
+try:
+    print("\033[92m" + "\n-----------------  INICIANDO PRODUTOR -----------------\n" + "\033[0m")
+    
+    # Enviando mensagens para o tópico do Kafka
+    for _ in range(20):  
+        mensagem = gerar_mensagem_venda()
+        producer.send('vendas_ecommerce', value=mensagem)
+        print(f"Mensagem enviada: {mensagem}")
+        time.sleep(3) 
+    
+    producer.flush()  
 
-producer.flush()  # Garante que todas as mensagens foram enviadas
-producer.close()
+except KeyboardInterrupt:
+    print("\033[93m" + "\n----------------- PRODUTOR INTERROMPIDO PELO USUÁRIO -----------------\n" + "\033[0m")
+except Exception as e:
+    print("\033[91m" + f"\n----------------- ERRO -----------------\nOcorreu um erro ao enviar as mensagens: {e}\n" + "\033[0m")
+finally:
+    producer.close()
+    print("\033[92m" + "Produtor finalizado com sucesso.\n" + "\033[0m")
