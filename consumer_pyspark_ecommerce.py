@@ -1,6 +1,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, from_json, sum as spark_sum, round as spark_round
 from pyspark.sql.types import StructType, StructField, StringType, ArrayType, IntegerType, FloatType, TimestampType
+from py4j.protocol import Py4JError
 
 # Inicializando a SparkSession com suporte ao Kafka
 spark = SparkSession.builder \
@@ -63,10 +64,20 @@ try:
         .start()
     
     query.awaitTermination()
+
 except KeyboardInterrupt:
-    print("\033[93m" + "\n-----------------  FINALIZANDO CONSUMIDOR -----------------\n" + "\033[0m")
+    print("\033[93m" + "\n----------------- CONSUMIDOR INTERROMPIDO PELO USUÁRIO -----------------\n" + "\033[0m")
+
+except Py4JError as e:
+    
+    if "awaitTermination" in str(e):
+        print("\033[93m" + "\n----------------- CONSUMIDOR INTERROMPIDO PELO USUÁRIO -----------------\n" + "\033[0m")
+    else:
+        print("\033[91m" + f"\n----------------- ERRO -----------------\nOcorreu um erro durante o consumo das mensagens: {e}\n" + "\033[0m")
+
 except Exception as error:
-    print("\033[91m" + f"\n----------------- ERRO -----------------\n{error}\n" + "\033[0m")
+    print("\033[91m" + f"\n----------------- ERRO -----------------\nOcorreu um erro durante o consumo das mensagens: {error}\n" + "\033[0m")
+
 finally:
-    print("\033[92m" + "\n----------------- CONSUMIDOR FINALIZADO COM SUCESSO -----------------\n" + "\033[0m")
+    print("\033[92m" + "Consumidor finalizado com sucesso.\n" + "\033[0m")
     spark.stop()
