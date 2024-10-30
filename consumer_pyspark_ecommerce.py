@@ -7,6 +7,9 @@ spark = SparkSession.builder \
     .appName("Kafka_Ecommerce_Consumer") \
     .getOrCreate()
 
+# Omitindo os logs de nível "INFO"
+spark.sparkContext.setLogLevel("WARN")
+
 # Configurações do Kafka
 kafka_bootstrap_servers = "localhost:9092"
 kafka_topic = "vendas_ecommerce"
